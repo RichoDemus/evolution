@@ -1,8 +1,9 @@
 "use strict";
 class Game
 {
-  constructor()
+  constructor(fpsHeader)
   {
+    this.header = fpsHeader;
     this.lastGeneration = 0;
     this.canvas = document.getElementById("canvas");
     this.context = this.canvas.getContext("2d");
@@ -148,13 +149,13 @@ class Game
   {
       var d = new Date();
       var currentTime = d.getTime();
-  	if((currentTime - lastFpsUpdate) > 1000)
-  	{
-  		var fps = Math.round(framesDrawn * 1000.0/(currentTime - lastFpsUpdate));
-  		lastFpsUpdate = currentTime;
-  		framesDrawn = 0;
-  		document.getElementById("header").innerHTML="FPS: " + fps;
-  	}
+    	if((currentTime - this.lastFpsUpdate) > 1000)
+    	{
+    		var fps = Math.round(framesDrawn * 1000.0/(currentTime - this.lastFpsUpdate));
+    		this.lastFpsUpdate = currentTime;
+    		this.framesDrawn = 0;
+    		this.header.innerHTML="FPS: " + fps;
+    	}
   }
 
   draw()

@@ -1,7 +1,6 @@
 var BOARD_SIZE=20;
 var CELL_SIZE=20;
 var SECONDS_PER_GENERATION = 0.3;
-var framesDrawn = 0;
 var lastFpsUpdate = 0;
 
 
