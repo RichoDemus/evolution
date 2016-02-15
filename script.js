@@ -1,12 +1,9 @@
 var BOARD_SIZE=20;
 var CELL_SIZE=20;
 var SECONDS_PER_GENERATION = 0.3;
-var canvas;
-var context;
-var shouldRun = false;
 var framesDrawn = 0;
 var lastFpsUpdate = 0;
-var lastGeneration = 0;
+
 
 
 // shim layer with setTimeout fallback

@@ -3,6 +3,7 @@ class Game
 {
   constructor()
   {
+    this.lastGeneration = 0;
     this.canvas = document.getElementById("canvas");
     this.context = this.canvas.getContext("2d");
     this.canvas.addEventListener("mousedown", this.getPosition.bind(this), false);
@@ -36,9 +37,9 @@ class Game
   {
   	var d = new Date();
   	var currentTime = d.getTime();
-  	if ((currentTime - lastGeneration) > (1000 * SECONDS_PER_GENERATION))
+  	if ((currentTime - this.lastGeneration) > (1000 * SECONDS_PER_GENERATION))
   	{
-  		lastGeneration = currentTime;
+  		this.lastGeneration = currentTime;
   		this.calculateNextGeneration();
   	}
   }
