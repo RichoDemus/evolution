@@ -4,6 +4,8 @@ class Game
   constructor(fpsHeader)
   {
     this.header = fpsHeader;
+    this.lastFpsUpdate = 0;
+    this.framesDrawn = 0;
     this.lastGeneration = 0;
     this.canvas = document.getElementById("canvas");
     this.context = this.canvas.getContext("2d");
@@ -22,16 +24,16 @@ class Game
 
   mainGameLoop()
   {
-      if(!this.shouldRun)
-      {
-      	console.log("should run is false, stopping main loop")
-      	return;
-      }
-      requestAnimFrame(this.mainGameLoop.bind(this));
+    if(!this.shouldRun)
+    {
+    	console.log("should run is false, stopping main loop")
+    	return;
+    }
+    requestAnimFrame(this.mainGameLoop.bind(this));
 
-      this.nextGeneration();
-      this.draw();
-      this.updateFPS();
+    this.nextGeneration();
+    this.draw();
+    this.updateFPS();
   }
 
   nextGeneration()
@@ -147,15 +149,16 @@ class Game
 
   updateFPS()
   {
-      var d = new Date();
-      var currentTime = d.getTime();
-    	if((currentTime - this.lastFpsUpdate) > 1000)
-    	{
-    		var fps = Math.round(framesDrawn * 1000.0/(currentTime - this.lastFpsUpdate));
-    		this.lastFpsUpdate = currentTime;
-    		this.framesDrawn = 0;
-    		this.header.innerHTML="FPS: " + fps;
-    	}
+    var d = new Date();
+    var currentTime = d.getTime();
+  	if((currentTime - this.lastFpsUpdate) > 1000)
+  	{
+  		var fps = Math.round(this.framesDrawn * 1000.0/(currentTime - this.lastFpsUpdate));
+  		this.lastFpsUpdate = currentTime;
+  		this.framesDrawn = 0;
+  		this.header.innerHTML="FPS: " + fps;
+      console.log("Refresh fps");
+  	}
   }
 
   draw()

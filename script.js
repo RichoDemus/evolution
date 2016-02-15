@@ -17,11 +17,11 @@ window.requestAnimFrame = (function(){
 
 window.onload = () =>
 {
-	const game = new Game();
-	const startButton = document.getElementById("startButton");
-	const stopButton = document.getElementById("stopButton");
-	const input = new Input(startButton, stopButton, game);
-
+  const header = document.getElementById("header");
+  const game = new Game(header);
+  const startButton = document.getElementById("startButton");
+  const stopButton = document.getElementById("stopButton");
+  const input = new Input(startButton, stopButton, game);
 }
 
 function start()
