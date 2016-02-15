@@ -1,8 +1,9 @@
 "use strict";
 class Game
 {
-  constructor(fpsHeader)
+  constructor(fpsHeader, properties)
   {
+    this.properties = properties;
     this.header = fpsHeader;
     this.lastFpsUpdate = 0;
     this.framesDrawn = 0;
@@ -10,7 +11,7 @@ class Game
     this.canvas = document.getElementById("canvas");
     this.context = this.canvas.getContext("2d");
     this.canvas.addEventListener("mousedown", this.getPosition.bind(this), false);
-    this.board = this.createArray(BOARD_SIZE, BOARD_SIZE);
+    this.board = this.createArray(this.properties.boardSize, this.properties.boardSize);
   }
   start()
   {
@@ -40,7 +41,7 @@ class Game
   {
   	var d = new Date();
   	var currentTime = d.getTime();
-  	if ((currentTime - this.lastGeneration) > (1000 * SECONDS_PER_GENERATION))
+  	if ((currentTime - this.lastGeneration) > (1000 * this.properties.secondsPerGeneration))
   	{
   		this.lastGeneration = currentTime;
   		this.calculateNextGeneration();
@@ -49,10 +50,10 @@ class Game
 
   calculateNextGeneration()
   {
-  	var newBoard = this.createArray(BOARD_SIZE, BOARD_SIZE);
-  	for(var y = 0; y < BOARD_SIZE; y++)
+  	var newBoard = this.createArray(this.properties.boardSize, this.properties.boardSize);
+  	for(var y = 0; y < this.properties.boardSize; y++)
   	{
-  		for(var x = 0; x < BOARD_SIZE; x++)
+  		for(var x = 0; x < this.properties.boardSize; x++)
   		{
   			this.calculateState(newBoard, x, y);
   		}
@@ -140,7 +141,7 @@ class Game
   isAlive(x, y)
   {
   	//Outside the boundaries are considered to be dead for calculation
-  	if(x < 0 || y < 0 || x >= BOARD_SIZE || y >= BOARD_SIZE)
+  	if(x < 0 || y < 0 || x >= this.properties.boardSize || y >= this.properties.boardSize)
   	{
   		return false;
   	}
@@ -157,16 +158,15 @@ class Game
   		this.lastFpsUpdate = currentTime;
   		this.framesDrawn = 0;
   		this.header.innerHTML="FPS: " + fps;
-      console.log("Refresh fps");
   	}
   }
 
   draw()
   {
   	this.context.clearRect ( 0 , 0 , this.canvas.width , this.canvas.height );
-  	for(var y = 0; y < BOARD_SIZE; y++)
+  	for(var y = 0; y < this.properties.boardSize; y++)
   	{
-  		for(var x = 0; x < BOARD_SIZE; x++)
+  		for(var x = 0; x < this.properties.boardSize; x++)
   		{
   			if(this.board[y][x] == true)
   			{
@@ -179,7 +179,7 @@ class Game
 
   drawCell(y,x)
   {
-  	this.context.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+  	this.context.fillRect(x * this.properties.cellSize, y * this.properties.cellSize, this.properties.cellSize, this.properties.cellSize);
   }
 
   getPosition(event)
@@ -190,8 +190,8 @@ class Game
     x -= this.canvas.offsetLeft;
     y -= this.canvas.offsetTop;
 
-    var cellY = Math.floor(y / CELL_SIZE);
-    var cellX = Math.floor(x / CELL_SIZE);
+    var cellY = Math.floor(y / this.properties.cellSize);
+    var cellX = Math.floor(x / this.properties.cellSize);
     if(this.board[cellY][cellX] == true)
     {
     	this.board[cellY][cellX] = false;
