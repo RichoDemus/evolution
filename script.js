@@ -9,9 +9,7 @@ var lastFpsUpdate = 0;
 var lastGeneration = 0;
 var board;
 
-window.onload=function(){init()};
-
-function init()
+window.onload = () =>
 {
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
