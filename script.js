@@ -7,8 +7,7 @@ var shouldRun = false;
 var framesDrawn = 0;
 var lastFpsUpdate = 0;
 var lastGeneration = 0;
-var board;
-var game;
+
 
 // shim layer with setTimeout fallback
 window.requestAnimFrame = (function(){
@@ -22,7 +21,7 @@ window.requestAnimFrame = (function(){
 
 window.onload = () =>
 {
-	game = new Game();
+	const game = new Game();
 	const startButton = document.getElementById("startButton");
 	const stopButton = document.getElementById("stopButton");
 	const input = new Input(startButton, stopButton, game);

@@ -13,12 +13,12 @@ class Input
   {
     this.startButton.disabled = true;
     this.stopButton.disabled = false;
-    game.start();
+    this.game.start();
   }
   stop()
   {
     this.startButton.disabled = false;
     this.stopButton.disabled = true;
-    game.stop();
+    this.game.stop();
   }
 }

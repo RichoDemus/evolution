@@ -3,12 +3,10 @@ class Game
 {
   constructor()
   {
-
-
     this.canvas = document.getElementById("canvas");
     this.context = this.canvas.getContext("2d");
     this.canvas.addEventListener("mousedown", this.getPosition.bind(this), false);
-    this.board = createArray(BOARD_SIZE, BOARD_SIZE);
+    this.board = this.createArray(BOARD_SIZE, BOARD_SIZE);
   }
   start()
   {
@@ -210,7 +208,7 @@ class Game
 
   	if (arguments.length > 1) {
   		var args = Array.prototype.slice.call(arguments, 1);
-  		while(i--) arr[length-1 - i] = createArray.apply(this, args);
+  		while(i--) arr[length-1 - i] = this.createArray.apply(this, args);
   	}
 
   	return arr;
